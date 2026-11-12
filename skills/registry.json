@@ -1,0 +1,196 @@
+{
+  "schema": "paper-skill/registry-v1",
+  "note": "Core (engine, integrity, workflow, tools, writing method, venue data) is always on and not listed. Edit with skill_profile.py register/unregister.",
+  "modules": {
+    "speech_base": {
+      "kind": "base",
+      "title": "Universal speech-AI base skill (causal chains, 7-sentence abstract, 1600 DPI)",
+      "files": [
+        "skills/default_speech_ai.md"
+      ],
+      "requires": [],
+      "token": "DEFAULT_SPEECH_AI"
+    },
+    "author_ieee_lab": {
+      "kind": "author",
+      "title": "IEEE-conference speech-lab standards and style overlay",
+      "requires": [
+        "speech_base"
+      ],
+      "token": "AUTHOR::IEEE_LAB_STYLE",
+      "evidence_slug": "ieee_lab_style",
+      "files": [
+        "references/01_ieee_lab_rules.md",
+        "references/06_conference_paper_style_guide.md",
+        "references/07_section_by_section_corrections_and_rules.md",
+        "references/08_figure_dpi_and_latex_quality.md",
+        "references/09_repair_manual_mistakes_to_globally_acceptable.md",
+        "skills/authors/ieee_lab_style.md"
+      ]
+    },
+    "author_clinical": {
+      "kind": "author",
+      "title": "Clinical and accented speech, multimodal perception, ablation-first style",
+      "requires": [
+        "speech_base"
+      ],
+      "token": "AUTHOR::CLINICAL_MULTIMODAL_STYLE",
+      "evidence_slug": "clinical_multimodal_style",
+      "files": [
+        "skills/authors/clinical_multimodal_style.md"
+      ]
+    },
+    "author_flow_tts": {
+      "kind": "author",
+      "title": "Flow-matching TTS, sound tokens, and Pareto-style reporting",
+      "requires": [
+        "speech_base"
+      ],
+      "token": "AUTHOR::FLOW_MATCHING_TTS_STYLE",
+      "evidence_slug": "flow_matching_tts_style",
+      "files": [
+        "skills/authors/flow_matching_tts_style.md"
+      ]
+    },
+    "author_vocoder": {
+      "kind": "author",
+      "title": "Efficient multilingual vocoding and benchmark reporting (related to the IEEE-lab style)",
+      "requires": [
+        "speech_base"
+      ],
+      "suggests": [
+        "author_ieee_lab"
+      ],
+      "token": "AUTHOR::VOCODER_BENCHMARK_STYLE",
+      "evidence_slug": "vocoder_benchmark_style",
+      "files": [
+        "skills/authors/vocoder_benchmark_style.md"
+      ]
+    },
+    "domain_tts": {
+      "kind": "domain",
+      "title": "TTS and vocoders",
+      "files": [
+        "skills/domains/tts_and_vocoders.md"
+      ],
+      "requires": [],
+      "suggests": [
+        "speech_base"
+      ],
+      "token": "DOMAIN::TTS_AND_VOCODERS"
+    },
+    "domain_asr": {
+      "kind": "domain",
+      "title": "ASR and error correction",
+      "files": [
+        "skills/domains/asr_and_error_correction.md"
+      ],
+      "requires": [],
+      "suggests": [
+        "speech_base"
+      ],
+      "token": "DOMAIN::ASR_AND_ERROR_CORRECTION"
+    },
+    "domain_dataset": {
+      "kind": "domain",
+      "title": "Datasets and corpora",
+      "files": [
+        "skills/domains/dataset_and_corpus.md"
+      ],
+      "requires": [],
+      "suggests": [
+        "speech_base"
+      ],
+      "token": "DOMAIN::DATASET_AND_CORPUS"
+    },
+    "domain_nlp": {
+      "kind": "domain",
+      "title": "NLP, sound tokens, AAC",
+      "files": [
+        "skills/domains/nlp_and_aac.md"
+      ],
+      "requires": [],
+      "suggests": [
+        "speech_base"
+      ],
+      "token": "DOMAIN::NLP_AND_AAC"
+    },
+    "domain_eval": {
+      "kind": "domain",
+      "title": "Reasoning and evaluation",
+      "files": [
+        "skills/domains/reasoning_and_evaluation.md"
+      ],
+      "requires": [],
+      "suggests": [
+        "speech_base"
+      ],
+      "token": "DOMAIN::REASONING_AND_EVALUATION"
+    },
+    "ml_craft": {
+      "kind": "craft",
+      "title": "ML paper-writing craft (Nanda, Farquhar, Gopen and Swan, Perez, Lipton, Steinhardt)",
+      "files": [
+        "references/22_craft_from_ml_paper_writing.md"
+      ],
+      "requires": [],
+      "source": "ml-paper-writing guide (Orchestra Research, MIT)"
+    },
+    "venue_acl": {
+      "kind": "venue",
+      "title": "ACL family wrapper",
+      "files": [
+        "templates/acl"
+      ],
+      "requires": []
+    },
+    "venue_ieee": {
+      "kind": "venue",
+      "title": "IEEE family wrapper",
+      "files": [
+        "templates/ieee"
+      ],
+      "requires": []
+    },
+    "venue_neurips": {
+      "kind": "venue",
+      "title": "NeurIPS wrapper",
+      "files": [
+        "templates/neurips"
+      ],
+      "requires": []
+    },
+    "venue_icml": {
+      "kind": "venue",
+      "title": "ICML wrapper",
+      "files": [
+        "templates/icml"
+      ],
+      "requires": []
+    },
+    "venue_iclr": {
+      "kind": "venue",
+      "title": "ICLR wrapper",
+      "files": [
+        "templates/iclr"
+      ],
+      "requires": []
+    },
+    "venue_aaai": {
+      "kind": "venue",
+      "title": "AAAI wrapper",
+      "files": [
+        "templates/aaai"
+      ],
+      "requires": []
+    },
+    "venue_colm": {
+      "kind": "venue",
+      "title": "COLM wrapper",
+      "files": [
+        "templates/colm"
+      ],
+      "requires": []
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "name": "ieee-lab+clinical",
+  "description": "Merge of the IEEE-lab and clinical styles; the IEEE-lab style has precedence",
+  "enable": [
+    "speech_base",
+    "domain_tts",
+    "domain_asr",
+    "domain_dataset",
+    "domain_nlp",
+    "domain_eval",
+    "ml_craft",
+    "venue_acl",
+    "venue_ieee",
+    "venue_neurips",
+    "venue_icml",
+    "venue_iclr",
+    "venue_aaai",
+    "venue_colm",
+    "author_ieee_lab",
+    "author_clinical"
+  ],
+  "precedence": [
+    "author_ieee_lab",
+    "author_clinical"
+  ]
+}

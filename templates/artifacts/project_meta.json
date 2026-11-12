@@ -1,0 +1,21 @@
+{
+  "project_name": "@@PROJECT_NAME@@",
+  "slug": "@@SLUG@@",
+  "title": "@@TITLE@@",
+  "tagline": "",
+  "venue_family": "@@FAMILY@@",
+  "anonymous": true,
+  "created": "@@DATE@@",
+  "authors": [
+    {"name": "First Author", "affiliation": "Institution, City, Country", "email": "", "orcid": "",
+     "roles": ["Conceptualization", "Methodology", "Writing - original draft"], "corresponding": true, "equal_contribution": false}
+  ],
+  "funding": [],
+  "licenses": {"paper": "CC-BY-4.0", "code": "Apache-2.0", "data": "CC-BY-4.0", "models": "Apache-2.0", "demo_media": "CC-BY-4.0"},
+  "repository_url": "",
+  "demo_url": "",
+  "third_party": [],
+  "human_subjects": {"involved": false, "approval": "", "consent": "", "compensation": ""},
+  "ai_assistance": {"used": true, "statement": "A generative AI assistant was used to draft and edit prose. The authors verified all claims, numbers, and citations and take full responsibility for the content."},
+  "experiments": {"auto_run": false, "max_gpu_hours_per_experiment": 0, "notes": "Set auto_run to true only to pre-authorise running experiments without asking each time."}
+}

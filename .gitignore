@@ -1,0 +1,9 @@
+.venv_pdf/
+__pycache__/
+*.pyc
+
+dist/
+.paper/
+skills/ACTIVE.md
+skills/ACTIVE_PROFILE.json
+skills/merged/

@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>@@PROJECT_NAME@@</title>
+<meta name="description" content="@@TAGLINE@@">
+<style>:root { --hue: @@HUE@@; }</style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="bar">
+  <a class="name" href="#top">@@PROJECT_NAME@@</a>
+  <nav id="nav" aria-label="Sections"></nav>
+  <button id="theme" type="button" aria-label="Switch between light and dark theme">Theme</button>
+</header>
+<main id="main">
+  <section class="hero" id="top">
+    <h1 id="h1"></h1>
+    <p class="tagline" id="tagline"></p>
+    <p class="summary" id="summary"></p>
+    <div class="screen" id="hero-screen" hidden><canvas id="hero-canvas" aria-label="Spectrogram of the first sample"></canvas></div>
+  </section>
+  <div id="sections"></div>
+</main>
+<footer id="credits"></footer>
+<noscript><p style="padding:1rem">This page needs JavaScript to play and compare the samples.</p></noscript>
+<script type="application/json" id="data">@@DATA@@</script>
+<script src="app.js"></script>
+</body>
+</html>

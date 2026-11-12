@@ -1,0 +1,24 @@
+{
+  "name": "flow-tts",
+  "description": "Flow-matching TTS style only; other author sources off",
+  "enable": [
+    "speech_base",
+    "domain_tts",
+    "domain_asr",
+    "domain_dataset",
+    "domain_nlp",
+    "domain_eval",
+    "ml_craft",
+    "venue_acl",
+    "venue_ieee",
+    "venue_neurips",
+    "venue_icml",
+    "venue_iclr",
+    "venue_aaai",
+    "venue_colm",
+    "author_flow_tts"
+  ],
+  "precedence": [
+    "author_flow_tts"
+  ]
+}

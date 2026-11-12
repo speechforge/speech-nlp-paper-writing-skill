@@ -1,0 +1,73 @@
+% @@PROJECT_NAME@@ -- COLM wrapper. Section bodies live in sections/*.tex (shared by every venue).
+% Fetch the style files:  python3 scripts/fetch_template.py colm --dest paper
+% Style options: submission (default, line numbers) | preprint | final (camera-ready: set \camerareadytrue and use [final]).
+\documentclass{article}
+\usepackage[submission]{colm2026_conference}   % camera-ready: [final]   preprint: [preprint]
+\usepackage{microtype}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+\usepackage{multirow}
+\usepackage{xcolor}
+\IfFileExists{math_commands.tex}{\input{math_commands.tex}}{}
+
+\newif\ifcameraready
+\camerareadyfalse
+\newcommand{\camerareadyonly}[1]{\ifcameraready #1\fi}
+\newcommand{\projectname}{@@PROJECT_NAME@@}
+
+\title{@@TITLE@@}
+\author{First Author \\ Department, Institution \\ \texttt{email@example.org}
+  \And Second Author \\ Department, Institution \\ \texttt{email@example.org}}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\input{sections/abstract}
+\end{abstract}
+
+\section{Introduction}\label{sec:intro}
+\input{sections/01_introduction}
+
+\section{Related Work}\label{sec:related}
+\input{sections/02_related_work}
+
+\section{Method}\label{sec:method}
+\input{sections/03_method}
+
+\section{Experimental Setup}\label{sec:setup}
+\input{sections/04_setup}
+
+\section{Results and Analysis}\label{sec:results}
+\input{sections/05_results}
+
+\section{Conclusion}\label{sec:conclusion}
+\input{sections/06_conclusion}
+
+\section*{Limitations}
+\input{sections/07_limitations}
+
+\section*{Ethics Statement}
+\input{sections/08_ethics}
+
+\section*{Licenses and Availability}
+\input{statements/license_statement}
+
+\camerareadyonly{%
+\section*{Author Contributions}
+\input{statements/credit_statement}
+\section*{Acknowledgments}
+\input{statements/acknowledgments}
+}
+
+\bibliography{references}
+\bibliographystyle{colm2026_conference}
+
+\appendix
+\section{Additional Details}\label{sec:appendix}
+\input{sections/A_appendix}
+
+\end{document}

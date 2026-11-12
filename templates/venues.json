@@ -1,0 +1,825 @@
+{
+ "schema": "paper-skill/venues-v1",
+ "source": "Checklists and requirements adapted from the MIT-licensed ml-paper-writing guide (Orchestra Research) and the official venue pages; verify against the current call for papers.",
+ "universal": [
+  {
+   "id": "u_claims",
+   "text": "All claims in the abstract and introduction are supported by evidence (claim-evidence map has no open row)",
+   "auto": {
+    "kind": "claims"
+   },
+   "blocking": true
+  },
+  {
+   "id": "u_citations",
+   "text": "References complete and verified; all citations resolve",
+   "auto": {
+    "kind": "citations"
+   },
+   "blocking": true
+  },
+  {
+   "id": "u_limitations",
+   "text": "A Limitations section exists and states honest scope",
+   "auto": {
+    "kind": "file_ready",
+    "path": "paper/sections/07_limitations.tex",
+    "min_words": 12
+   },
+   "blocking": true
+  },
+  {
+   "id": "u_captions",
+   "text": "Every figure and table has a self-contained caption",
+   "auto": {
+    "kind": "captions"
+   }
+  },
+  {
+   "id": "u_errorbars",
+   "text": "Error bars, confidence intervals, or tests are reported, with the number of runs and how the uncertainty is computed",
+   "auto": {
+    "kind": "regex",
+    "paths": [
+     "paper/sections/05_results.tex",
+     "paper/sections/04_setup.tex"
+    ],
+    "pattern": "standard deviation|standard error|confidence interval|\\\\pm|seeds|bootstrap|error bar|significance"
+   }
+  },
+  {
+   "id": "u_hyper",
+   "text": "Hyperparameters and their selection are documented",
+   "auto": {
+    "kind": "regex",
+    "paths": [
+     "paper/sections/04_setup.tex",
+     "paper/sections/A_appendix.tex"
+    ],
+    "pattern": "learning rate|batch size|hyperparameter"
+   }
+  },
+  {
+   "id": "u_compute",
+   "text": "Compute resources are stated (hardware, time per run, total)",
+   "auto": {
+    "kind": "regex",
+    "paths": [
+     "paper/sections/04_setup.tex",
+     "paper/sections/A_appendix.tex"
+    ],
+    "pattern": "GPU|TPU|CPU|hours|FLOP"
+   }
+  },
+  {
+   "id": "u_license",
+   "text": "Licenses of used and released assets are stated",
+   "auto": {
+    "kind": "statement",
+    "name": "license_statement"
+   },
+   "blocking": true
+  },
+  {
+   "id": "u_ethics",
+   "text": "Ethics and broader-impact considerations are addressed (or a one-sentence justification)",
+   "auto": {
+    "kind": "file_ready",
+    "path": "paper/sections/08_ethics.tex",
+    "min_words": 8
+   }
+  },
+  {
+   "id": "u_irb",
+   "text": "Human-subjects approval or exemption and consent are documented",
+   "auto": {
+    "kind": "meta",
+    "path": "human_subjects.approval"
+   },
+   "applies_if": "human_subjects.involved"
+  },
+  {
+   "id": "u_baselines",
+   "text": "Baselines are appropriate, recent, and fairly tuned",
+   "auto": {
+    "kind": "manual"
+   }
+  },
+  {
+   "id": "u_build",
+   "text": "The PDF compiles without errors and all figures render",
+   "auto": {
+    "kind": "build"
+   }
+  },
+  {
+   "id": "u_anon",
+   "text": "Review version is anonymous (no names, acknowledgments, grant numbers, identifying links)",
+   "auto": {
+    "kind": "anon"
+   },
+   "blocking": true
+  },
+  {
+   "id": "u_template",
+   "text": "The correct template (venue and year) is used; margins and font sizes are untouched",
+   "auto": {
+    "kind": "manual"
+   }
+  },
+  {
+   "id": "u_pages",
+   "text": "Main content is within the page limit for the current call",
+   "auto": {
+    "kind": "manual"
+   }
+  },
+  {
+   "id": "u_supp",
+   "text": "Supplementary material is organised and self-consistent with the paper",
+   "auto": {
+    "kind": "manual"
+   }
+  }
+ ],
+ "venues": {
+  "generic": {
+   "name": "Generic / preprint",
+   "family": "generic",
+   "version": "n/a",
+   "pages": {
+    "content": "n/a"
+   },
+   "citations": "natbib numeric",
+   "anonymity": "none",
+   "official": {},
+   "required_sections": [
+    "limitations"
+   ],
+   "items": []
+  },
+  "acl": {
+   "name": "ACL family (ACL, EMNLP, NAACL, EACL, AACL, ARR)",
+   "aliases": [
+    "emnlp",
+    "naacl",
+    "eacl",
+    "aacl",
+    "arr"
+   ],
+   "family": "acl",
+   "version": "acl-style-files pinned commit; read the current call",
+   "pages": {
+    "content": "long 8 / short 4 (review); +1 camera-ready",
+    "refs": "unlimited",
+    "appendix": "allowed, outside the limit, same anonymity rules"
+   },
+   "citations": "natbib author-year (\\citet, \\citep); acl_natbib",
+   "anonymity": "[review] anonymous | [final] | [preprint]",
+   "official": {
+    "style": "https://github.com/acl-org/acl-style-files",
+    "formatting": "https://acl-org.github.io/ACLPUB/formatting.html",
+    "arr": "https://aclrollingreview.org/"
+   },
+   "required_sections": [
+    "limitations",
+    "ethics (when relevant)",
+    "responsible NLP checklist (submission system)"
+   ],
+   "items": [
+    {
+     "id": "acl_limitations",
+     "text": "Limitations section present (mandatory; does not count toward the page limit)",
+     "auto": {
+      "kind": "file_ready",
+      "path": "paper/sections/07_limitations.tex",
+      "min_words": 12
+     },
+     "blocking": true
+    },
+    {
+     "id": "acl_ethics",
+     "text": "Ethical considerations addressed when relevant",
+     "auto": {
+      "kind": "file_ready",
+      "path": "paper/sections/08_ethics.tex",
+      "min_words": 8
+     }
+    },
+    {
+     "id": "acl_responsible",
+     "text": "Responsible NLP: bias, fairness, dual-use, and privacy considered",
+     "auto": {
+      "kind": "regex",
+      "paths": [
+       "paper/sections/08_ethics.tex",
+       "paper/sections/07_limitations.tex"
+      ],
+      "pattern": "bias|fair|dual|misuse|privacy|harm"
+     }
+    },
+    {
+     "id": "acl_multilingual",
+     "text": "If applicable: language diversity addressed, non-English languages included, translation quality verified",
+     "auto": {
+      "kind": "manual"
+     }
+    },
+    {
+     "id": "acl_human",
+     "text": "If applicable: annotator details, agreement metrics, and compensation documented",
+     "auto": {
+      "kind": "regex",
+      "paths": [
+       "paper/sections/04_setup.tex",
+       "paper/sections/08_ethics.tex"
+      ],
+      "pattern": "annotator|listener|agreement|kappa|alpha|compensat"
+     }
+    },
+    {
+     "id": "acl_ai",
+     "text": "Disclosure of AI writing assistance follows the current policy",
+     "auto": {
+      "kind": "manual"
+     }
+    },
+    {
+     "id": "acl_checklist",
+     "text": "Responsible NLP checklist completed in the submission system (not in the PDF)",
+     "auto": {
+      "kind": "manual"
+     }
+    }
+   ]
+  },
+  "ieee": {
+   "name": "IEEE family (IEEEtran, ICASSP, Interspeech, SLT, ASRU, EUSIPCO, IJCNN)",
+   "aliases": [
+    "icassp",
+    "interspeech",
+    "slt",
+    "asru",
+    "eusipco",
+    "ijcnn",
+    "taslp"
+   ],
+   "family": "ieee",
+   "version": "IEEEtran from CTAN; ICASSP and Interspeech publish a kit every year",
+   "pages": {
+    "content": "typically 4 (+1 page for references only); verify the call",
+    "refs": "see call",
+    "appendix": "normally not in the budget; use supplementary material or the project site"
+   },
+   "citations": "numeric \\cite; IEEEtran",
+   "anonymity": "follow the call (often single-blind; some tracks double-blind)",
+   "official": {
+    "templates": "https://www.ieee.org/conferences/publishing/templates.html"
+   },
+   "required_sections": [
+    "index terms",
+    "ACKNOWLEDGMENT (camera-ready)"
+   ],
+   "items": [
+    {
+     "id": "ieee_keywords",
+     "text": "Index terms present (4 to 6, alphabetical)",
+     "auto": {
+      "kind": "no_marker",
+      "path": "paper/main.tex",
+      "pattern": "IEEEkeywords"
+     }
+    },
+    {
+     "id": "ieee_style",
+     "text": "Bibliography style is IEEEtran and citations are numeric",
+     "auto": {
+      "kind": "regex",
+      "paths": [
+       "paper/main.tex"
+      ],
+      "pattern": "bibliographystyle\\{IEEEtran\\}"
+     }
+    },
+    {
+     "id": "ieee_ci",
+     "text": "Listening-test scores carry 95% confidence intervals and listener demographics (ITU-T P.800 convention)",
+     "auto": {
+      "kind": "regex",
+      "paths": [
+       "paper/sections/05_results.tex",
+       "paper/sections/04_setup.tex"
+      ],
+      "pattern": "95\\s*\\\\?%|confidence interval|P\\.800|MUSHRA|MOS"
+     }
+    },
+    {
+     "id": "ieee_abstract",
+     "text": "Abstract within about 150 to 220 words",
+     "auto": {
+      "kind": "abstract_words",
+      "max": 220
+     }
+    },
+    {
+     "id": "ieee_figures",
+     "text": "Figures are vector or at least 1600 DPI raster; fonts embedded; PDF eXpress compliant",
+     "auto": {
+      "kind": "manual"
+     }
+    },
+    {
+     "id": "ieee_funding",
+     "text": "Funding sentence follows the lab format (MeitY wording when applicable)",
+     "auto": {
+      "kind": "manual"
+     }
+    }
+   ]
+  },
+  "neurips": {
+   "name": "NeurIPS",
+   "family": "neurips",
+   "version": "2025 kit pinned; check the current year's style files page",
+   "pages": {
+    "content": 9,
+    "camera_extra": 0,
+    "refs": "unlimited",
+    "appendix": "unlimited; checklist outside the limit"
+   },
+   "citations": "natbib numeric",
+   "anonymity": "default = anonymous; [final]; [preprint]",
+   "official": {
+    "style": "https://neurips.cc/Conferences/2025/PaperInformation/StyleFiles",
+    "checklist": "https://neurips.cc/public/guides/PaperChecklist",
+    "reviewer": "https://neurips.cc/Conferences/2025/ReviewerGuidelines"
+   },
+   "required_sections": [
+    "limitations",
+    "paper checklist (after references, outside the limit)"
+   ],
+   "items": [
+    {
+     "id": "n01_claims",
+     "text": "Claims alignment: abstract and introduction match theoretical and experimental results; contributions, assumptions, and limitations clearly stated",
+     "auto": {
+      "kind": "claims"
+     },
+     "blocking": true
+    },
+    {
+     "id": "n02_limitations",
+     "text": "Limitations: dedicated section covering strong assumptions, robustness to violations, scope, and performance-influencing factors",
+     "auto": {
+      "kind": "file_ready",
+      "path": "paper/sections/07_limitations.tex",
+      "min_words": 12
+     },
+     "blocking": true
+    },
+    {
+     "id": "n03_theory",
+     "text": "Theory and proofs: full assumptions and complete proofs (main text or appendix, with a proof sketch in the main text)",
+     "auto": {
+      "kind": "manual"
+     }
+    },
+    {
+     "id": "n04_repro",
+     "text": "Reproducibility: steps to verify results (code release, instructions, model access, or checkpoints)",
+     "auto": {
+      "kind": "regex_all",
+      "paths": [
+       "paper/statements/license_statement.tex",
+       "paper/sections/04_setup.tex",
+       "paper/sections/A_appendix.tex"
+      ],
+      "patterns": [
+       "released|available",
+       "seed|version|checkpoint|environment|instructions"
+      ]
+     }
+    },
+    {
+     "id": "n05_data_code",
+     "text": "Data and code access: instructions, exact commands, and environment (supplement or URLs)",
+     "auto": {
+      "kind": "statement",
+      "name": "license_statement"
+     }
+    },
+    {
+     "id": "n06_details",
+     "text": "Experimental details: data splits, hyperparameters, and how they were selected",
+     "auto": {
+      "kind": "regex_all",
+      "paths": [
+       "paper/sections/04_setup.tex",
+       "paper/sections/A_appendix.tex"
+      ],
+      "patterns": [
+       "split",
+       "hyperparameter|learning rate|batch size"
+      ]
+     }
+    },
+    {
+     "id": "n07_significance",
+     "text": "Statistical significance: error bars, intervals, or tests, with the calculation method and assumptions",
+     "auto": {
+      "kind": "regex",
+      "paths": [
+       "paper/sections/05_results.tex",
+       "paper/sections/04_setup.tex"
+      ],
+      "pattern": "standard deviation|standard error|confidence interval|\\\\pm|bootstrap|seeds"
+     }
+    },
+    {
+     "id": "n08_compute",
+     "text": "Compute resources: worker types (CPU/GPU), memory, storage, time per run, and total project compute",
+     "auto": {
+      "kind": "regex",
+      "paths": [
+       "paper/sections/04_setup.tex",
+       "paper/sections/A_appendix.tex"
+      ],
+      "pattern": "GPU|TPU|CPU|hours|FLOP"
+     }
+    },
+    {
+     "id": "n09_ethics_code",
+     "text": "Code of Ethics: compliance confirmed, deviations noted",
+     "auto": {
+      "kind": "manual"
+     }
+    },
+    {
+     "id": "n10_broader",
+     "text": "Broader impacts: negative applications, fairness, privacy, mitigation",
+     "auto": {
+      "kind": "file_ready",
+      "path": "paper/sections/08_ethics.tex",
+      "min_words": 8
+     }
+    },
+    {
+     "id": "n11_safeguards",
+     "text": "Safeguards: controlled release and usage guidelines for high-risk models or scraped data",
+     "auto": {
+      "kind": "manual"
+     }
+    },
+    {
+     "id": "n12_licenses",
+     "text": "License respect: creators cited; license names, URLs, versions, and terms of service",
+     "auto": {
+      "kind": "statement",
+      "name": "license_statement"
+     }
+    },
+    {
+     "id": "n13_assets",
+     "text": "Asset documentation: datasheet or model card for new releases (training data, limitations, consent, licensing)",
+     "auto": {
+      "kind": "manual"
+     }
+    },
+    {
+     "id": "n14_human",
+     "text": "Human subjects: instructions, compensation, and minimum-wage compliance for crowdsourcing",
+     "auto": {
+      "kind": "regex",
+      "paths": [
+       "paper/sections/04_setup.tex",
+       "paper/sections/08_ethics.tex"
+      ],
+      "pattern": "instruction|compensat|paid|wage"
+     },
+     "applies_if": "human_subjects.involved"
+    },
+    {
+     "id": "n15_irb",
+     "text": "IRB approval or equivalent, with risks disclosed (anonymised at submission)",
+     "auto": {
+      "kind": "meta",
+      "path": "human_subjects.approval"
+     },
+     "applies_if": "human_subjects.involved"
+    },
+    {
+     "id": "n16_llm",
+     "text": "LLM declaration: disclose LLMs used as a core methodology component (writing and editing use needs no declaration)",
+     "auto": {
+      "kind": "manual"
+     }
+    }
+   ]
+  },
+  "icml": {
+   "name": "ICML",
+   "family": "icml",
+   "version": "2026 kit (official archive pinned)",
+   "pages": {
+    "content": "8 (+1 camera-ready)",
+    "refs": "unlimited",
+    "appendix": "unlimited"
+   },
+   "citations": "natbib; icml2026.bst",
+   "anonymity": "default blind; [preprint]; [accepted]",
+   "official": {
+    "author_instructions": "https://icml.cc/Conferences/2026/AuthorInstructions",
+    "style": "https://media.icml.cc/Conferences/ICML2026/Styles/icml2026.zip"
+   },
+   "required_sections": [
+    "Impact Statement (end of paper, before references, outside the limit)"
+   ],
+   "items": [
+    {
+     "id": "icml_impact",
+     "text": "Broader Impact / Impact Statement: positive impacts, negative impacts, mitigation, who may be affected",
+     "auto": {
+      "kind": "file_ready",
+      "path": "paper/sections/08_ethics.tex",
+      "min_words": 8
+     },
+     "blocking": true
+    },
+    {
+     "id": "icml_splits",
+     "text": "Data splits clearly specified",
+     "auto": {
+      "kind": "regex",
+      "paths": [
+       "paper/sections/04_setup.tex"
+      ],
+      "pattern": "split|train|validation|test"
+     }
+    },
+    {
+     "id": "icml_hyper",
+     "text": "Hyperparameters listed, with search ranges and selection method",
+     "auto": {
+      "kind": "regex_all",
+      "paths": [
+       "paper/sections/04_setup.tex",
+       "paper/sections/A_appendix.tex"
+      ],
+      "patterns": [
+       "hyperparameter|learning rate|batch size",
+       "range|search|grid|selected|selection"
+      ]
+     }
+    },
+    {
+     "id": "icml_compute",
+     "text": "Compute resources specified",
+     "auto": {
+      "kind": "regex",
+      "paths": [
+       "paper/sections/04_setup.tex",
+       "paper/sections/A_appendix.tex"
+      ],
+      "pattern": "GPU|TPU|CPU|hours|FLOP"
+     }
+    },
+    {
+     "id": "icml_code",
+     "text": "Code availability stated",
+     "auto": {
+      "kind": "regex",
+      "paths": [
+       "paper/statements/license_statement.tex"
+      ],
+      "pattern": "code"
+     }
+    },
+    {
+     "id": "icml_errorbars",
+     "text": "Error bars on all figures; standard deviation versus standard error specified; number of runs stated",
+     "auto": {
+      "kind": "regex",
+      "paths": [
+       "paper/sections/05_results.tex",
+       "paper/sections/04_setup.tex"
+      ],
+      "pattern": "standard deviation|standard error|confidence interval|seeds|runs"
+     }
+    },
+    {
+     "id": "icml_tests",
+     "text": "Significance tests if comparing methods",
+     "auto": {
+      "kind": "regex",
+      "paths": [
+       "paper/sections/05_results.tex"
+      ],
+      "pattern": "test|p\\s*[<=]|bootstrap|significan"
+     }
+    },
+    {
+     "id": "icml_anon_repo",
+     "text": "No identifiable repository URLs; prior work cited in the third person",
+     "auto": {
+      "kind": "forbidden",
+      "paths": [
+       "paper/sections"
+      ],
+      "patterns": [
+       "github\\.com/[A-Za-z0-9_.-]+/",
+       "gitlab\\.com/[A-Za-z0-9_.-]+/"
+      ],
+      "only_if_anonymous": true
+     },
+     "blocking": true
+    }
+   ]
+  },
+  "iclr": {
+   "name": "ICLR",
+   "family": "iclr",
+   "version": "2026 kit (official archive pinned)",
+   "pages": {
+    "content": "9 (+1 camera-ready)",
+    "refs": "unlimited",
+    "appendix": "unlimited"
+   },
+   "citations": "natbib; iclr2026_conference.bst",
+   "anonymity": "blind by default; \\iclrfinalcopy for camera-ready",
+   "official": {
+    "author_guide": "https://iclr.cc/Conferences/2026/AuthorGuide",
+    "template": "https://github.com/ICLR/Master-Template"
+   },
+   "required_sections": [
+    "LLM-use disclosure (separate appendix section, if LLMs played a significant role)"
+   ],
+   "items": [
+    {
+     "id": "iclr_llm",
+     "text": "LLM disclosure: if LLMs played a significant role in ideation or writing (could be regarded as a contributor), describe the precise role in a separate appendix section; grammar checking and minor editing need none",
+     "auto": {
+      "kind": "file_ready",
+      "path": "paper/statements/ai_disclosure.tex",
+      "min_words": 8
+     },
+     "blocking": true
+    },
+    {
+     "id": "iclr_repro",
+     "text": "Reproducibility statement (optional, recommended): supporting materials, code, data, checkpoints",
+     "auto": {
+      "kind": "regex",
+      "paths": [
+       "paper/statements/license_statement.tex"
+      ],
+      "pattern": "code|data|checkpoint"
+     }
+    },
+    {
+     "id": "iclr_ethics",
+     "text": "Ethics statement (optional, up to one page, outside the limit)",
+     "auto": {
+      "kind": "file_ready",
+      "path": "paper/sections/08_ethics.tex",
+      "min_words": 8
+     }
+    },
+    {
+     "id": "iclr_reciprocal",
+     "text": "Reciprocal reviewing: authors on 3 or more papers review at least 6; each submission has at least one author registered to review at least 3",
+     "auto": {
+      "kind": "manual"
+     }
+    },
+    {
+     "id": "iclr_anon",
+     "text": "No identifying repository URLs in the review version",
+     "auto": {
+      "kind": "forbidden",
+      "paths": [
+       "paper/sections"
+      ],
+      "patterns": [
+       "github\\.com/[A-Za-z0-9_.-]+/"
+      ],
+      "only_if_anonymous": true
+     },
+     "blocking": true
+    }
+   ]
+  },
+  "aaai": {
+   "name": "AAAI",
+   "family": "aaai",
+   "version": "2026 kit; use the unmodified author kit",
+   "pages": {
+    "content": "7 (+1 camera-ready)",
+    "refs": "unlimited",
+    "appendix": "unlimited"
+   },
+   "citations": "natbib; style sets aaai2026 bibliography style itself",
+   "anonymity": "[submission] option; remove for camera-ready",
+   "official": {
+    "author_kit": "https://aaai.org/authorkit26/"
+   },
+   "required_sections": [
+    "strict adherence to the style file"
+   ],
+   "items": [
+    {
+     "id": "aaai_forbidden",
+     "text": "No forbidden packages or commands (hyperref, geometry, fullpage, balance, authblk, float, fontenc, \\newpage, \\clearpage, \\pagestyle, \\baselinestretch, \\columnsep, \\tiny, negative \\vspace)",
+     "auto": {
+      "kind": "forbidden",
+      "paths": [
+       "paper/main.tex",
+       "paper/sections",
+       "paper/statements"
+      ],
+      "patterns": [
+       "\\\\usepackage(\\[[^\\]]*\\])?\\{(hyperref|geometry|fullpage|balance|authblk|float|fontenc|flushend|multicol|navigator|indentfirst)\\}",
+       "\\\\(newpage|clearpage|pagebreak|pagestyle|baselinestretch|columnsep|balance|nocopyright)\\b",
+       "\\\\tiny\\b",
+       "\\\\vspace\\{-"
+      ]
+     },
+     "blocking": true
+    },
+    {
+     "id": "aaai_bibstyle",
+     "text": "No \\bibliographystyle command (the style file sets it; a second one is an error)",
+     "auto": {
+      "kind": "forbidden",
+      "paths": [
+       "paper/main.tex"
+      ],
+      "patterns": [
+       "^[^%\\n]*\\\\bibliographystyle"
+      ]
+     },
+     "blocking": true
+    },
+    {
+     "id": "aaai_anon",
+     "text": "Anonymous-submission option is used for review and links do not reveal identity",
+     "auto": {
+      "kind": "anon"
+     },
+     "blocking": true
+    },
+    {
+     "id": "aaai_checklists",
+     "text": "Reproducibility and other checklists in the current author kit are completed",
+     "auto": {
+      "kind": "manual"
+     }
+    }
+   ]
+  },
+  "colm": {
+   "name": "COLM",
+   "family": "colm",
+   "version": "2026 template (official repository pinned at a commit)",
+   "pages": {
+    "content": "9 (+1 camera-ready)",
+    "refs": "unlimited",
+    "appendix": "unlimited"
+   },
+   "citations": "natbib; colm2026_conference.bst",
+   "anonymity": "[submission] default (line numbers); [preprint]; [final]",
+   "official": {
+    "template": "https://github.com/COLM-org/Template",
+    "cfp": "https://colmweb.org/"
+   },
+   "required_sections": [
+    "Ethics Statement and Author Contributions as in the official sample"
+   ],
+   "items": [
+    {
+     "id": "colm_ethics",
+     "text": "Ethics statement present (the official sample includes one)",
+     "auto": {
+      "kind": "file_ready",
+      "path": "paper/sections/08_ethics.tex",
+      "min_words": 8
+     }
+    },
+    {
+     "id": "colm_focus",
+     "text": "The paper is framed around language models and their evaluation or use",
+     "auto": {
+      "kind": "manual"
+     }
+    },
+    {
+     "id": "colm_anon",
+     "text": "Review version is anonymous (submission option, no identifying links)",
+     "auto": {
+      "kind": "anon"
+     },
+     "blocking": true
+    }
+   ]
+  }
+ }
+}

@@ -1,0 +1,86 @@
+% @@PROJECT_NAME@@ -- ICML wrapper. Section bodies live in sections/*.tex (shared by every venue).
+% Fetch the style files:  python3 scripts/fetch_template.py icml --dest paper
+% Style options: none = blind submission | preprint | accepted = camera-ready.
+\documentclass{article}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{booktabs}
+\usepackage{hyperref}                 % keep before icml2026, as in the official example
+\usepackage{icml2026}                 % camera-ready: \usepackage[accepted]{icml2026}   preprint: \usepackage[preprint]{icml2026}
+\usepackage{amsmath,amssymb}
+\usepackage{multirow}
+\usepackage{xcolor}
+
+\newif\ifcameraready
+\camerareadyfalse
+\newcommand{\camerareadyonly}[1]{\ifcameraready #1\fi}
+\newcommand{\projectname}{@@PROJECT_NAME@@}
+
+\icmltitlerunning{@@PROJECT_NAME@@}
+
+\begin{document}
+
+\twocolumn[
+  \icmltitle{@@TITLE@@}
+  \icmlsetsymbol{equal}{*}
+  \begin{icmlauthorlist}
+    \icmlauthor{First Author}{aff1}
+    \icmlauthor{Second Author}{aff1}
+  \end{icmlauthorlist}
+  \icmlaffiliation{aff1}{Department, Institution, City, Country}
+  \icmlcorrespondingauthor{First Author}{email@example.org}
+  \icmlkeywords{[INSERT: keywords for PDF metadata]}
+  \vskip 0.3in
+]
+
+\printAffiliationsAndNotice{}  % required even if empty
+
+\begin{abstract}
+\input{sections/abstract}
+\end{abstract}
+
+\section{Introduction}\label{sec:intro}
+\input{sections/01_introduction}
+
+\section{Related Work}\label{sec:related}
+\input{sections/02_related_work}
+
+\section{Method}\label{sec:method}
+\input{sections/03_method}
+
+\section{Experimental Setup}\label{sec:setup}
+\input{sections/04_setup}
+
+\section{Results and Analysis}\label{sec:results}
+\input{sections/05_results}
+
+\section{Conclusion}\label{sec:conclusion}
+\input{sections/06_conclusion}
+
+\section*{Limitations}
+\input{sections/07_limitations}
+
+% ICML requires an Impact Statement at the end of the paper, before the references (outside the page limit).
+\section*{Impact Statement}
+\input{sections/08_ethics}
+
+\section*{Licenses and Availability}
+\input{statements/license_statement}
+
+\camerareadyonly{%
+\section*{Author Contributions}
+\input{statements/credit_statement}
+\section*{Acknowledgements}
+\input{statements/acknowledgments}
+}
+
+\bibliography{references}
+\bibliographystyle{icml2026}
+
+\appendix
+\onecolumn
+\section{Additional Details}\label{sec:appendix}
+\input{sections/A_appendix}
+
+\end{document}

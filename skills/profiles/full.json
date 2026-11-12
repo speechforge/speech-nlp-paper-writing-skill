@@ -1,0 +1,30 @@
+{
+  "name": "full",
+  "description": "Everything on (default; the skill as originally delivered plus all additions)",
+  "enable": [
+    "speech_base",
+    "domain_tts",
+    "domain_asr",
+    "domain_dataset",
+    "domain_nlp",
+    "domain_eval",
+    "ml_craft",
+    "venue_acl",
+    "venue_ieee",
+    "venue_neurips",
+    "venue_icml",
+    "venue_iclr",
+    "venue_aaai",
+    "venue_colm",
+    "author_ieee_lab",
+    "author_clinical",
+    "author_flow_tts",
+    "author_vocoder"
+  ],
+  "precedence": [
+    "author_ieee_lab",
+    "author_vocoder",
+    "author_clinical",
+    "author_flow_tts"
+  ]
+}

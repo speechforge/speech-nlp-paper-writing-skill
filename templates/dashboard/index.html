@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Paper progress</title>
+<style>
+:root { --bg:#fff; --ink:#14213d; --muted:#4f5b73; --line:#d9dee7; --soft:#eef2f8; --done:#0072b2; --fail:#d55e00; --warn:#8a5a00; --warnfill:#e69f00;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif; --sans:Seravek,"Gill Sans Nova",Ubuntu,Calibri,"DejaVu Sans",system-ui,sans-serif; color-scheme:light; }
+@media (prefers-color-scheme: dark) { :root { --bg:#0f1624; --ink:#e8edf7; --muted:#a3aec4; --line:#2a3550; --soft:#18223a; --done:#56b4e9; --fail:#ff9a5c; --warn:#f0c060; --warnfill:#e69f00; color-scheme:dark; } }
+* { box-sizing:border-box; } body { margin:0; background:var(--bg); color:var(--ink); font:1rem/1.55 var(--sans); }
+a { color:var(--done); } :focus-visible { outline:3px solid var(--done); outline-offset:2px; }
+.wrap { max-width:76rem; margin:0 auto; padding:1.6rem clamp(1rem,4vw,2.5rem) 4rem; }
+header { display:flex; flex-wrap:wrap; gap:1rem 2rem; align-items:end; justify-content:space-between; padding-bottom:1.2rem; }
+h1 { font:700 clamp(1.8rem,4vw,2.8rem)/1.1 var(--serif); margin:0; letter-spacing:-0.01em; }
+.sub { margin:.35rem 0 0; color:var(--muted); font-size:.95rem; } .actions { display:flex; flex-wrap:wrap; gap:.6rem; align-items:center; }
+button, .btn { font:inherit; font-size:.95rem; padding:.45rem .95rem; border:1px solid var(--ink); background:var(--ink); color:var(--bg); border-radius:6px; cursor:pointer; text-decoration:none; }
+button.ghost, .btn.ghost { background:transparent; color:var(--ink); border-color:var(--line); } button:disabled { opacity:.55; cursor:progress; } .btn[aria-disabled="true"] { opacity:.4; pointer-events:none; }
+h2 { font:700 1.25rem/1.2 var(--serif); margin:0 0 .6rem; }
+/* pipeline strip */
+.strip { list-style:none; display:grid; grid-template-columns:repeat(10,minmax(5.6rem,1fr)); gap:.35rem; padding:0; margin:0 0 2.2rem; overflow-x:auto; }
+.strip li { padding-top:.55rem; border-top:6px solid var(--line); position:relative; min-width:5.6rem; }
+.strip li .fill { position:absolute; left:0; top:-6px; height:6px; background:var(--done); }
+.strip li[data-state="done"] { border-top-color:var(--done); } .strip li[data-active="true"] .nm { text-decoration:underline; text-decoration-thickness:2px; text-underline-offset:.25em; }
+.nm { font:700 .95rem var(--serif); display:block; } .st { font-size:.82rem; color:var(--muted); display:flex; align-items:center; gap:.35rem; }
+.dot { width:.7rem; height:.7rem; border-radius:50%; border:2px solid var(--muted); display:inline-block; flex:none; }
+li[data-state="done"] .dot { background:var(--done); border-color:var(--done); } li[data-state="progress"] .dot { background:linear-gradient(90deg,var(--done) 50%,transparent 50%); border-color:var(--done); }
+.det { font-size:.8rem; color:var(--muted); margin-top:.15rem; line-height:1.3; }
+.grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,26rem),1fr)); gap:2.2rem 3rem; }
+section { min-width:0; } ul.plain, ol.plain { margin:0; padding:0; list-style:none; } ol.plain { counter-reset:n; } ol.plain li { padding:.35rem 0 .35rem 1.8rem; position:relative; border-top:1px solid var(--line); } ol.plain li::before { counter-increment:n; content:counter(n); position:absolute; left:0; font-weight:700; color:var(--muted); }
+.gate { display:grid; grid-template-columns:4.4rem 1fr; gap:.7rem; padding:.45rem 0; border-top:1px solid var(--line); align-items:baseline; }
+.tag { font:700 .78rem var(--sans); padding:.05rem .45rem; border-radius:4px; text-align:center; border:2px solid; }
+.tag.pass { color:var(--done); border-color:var(--done); } .tag.fail { background:var(--fail); border-color:var(--fail); color:#fff; } .tag.warn { color:var(--warn); border-color:var(--warnfill); border-style:dashed; }
+.gate .d { color:var(--muted); font-size:.88rem; word-break:break-word; }
+table { width:100%; border-collapse:collapse; font-size:.93rem; } th,td { text-align:left; padding:.35rem .6rem .35rem 0; border-top:1px solid var(--line); vertical-align:top; } th { font-weight:600; color:var(--muted); border-top:0; }
+.n { font-variant-numeric:tabular-nums; text-align:right; } .bar { height:.55rem; background:var(--soft); border-radius:3px; overflow:hidden; display:flex; } .bar i { display:block; height:100%; }
+.legend { display:flex; flex-wrap:wrap; gap:.3rem 1.1rem; font-size:.88rem; color:var(--muted); margin-top:.5rem; } .legend b { color:var(--ink); }
+.thumbs { display:grid; grid-template-columns:repeat(auto-fill,minmax(9rem,1fr)); gap:.8rem; } .thumbs figure { margin:0; } .thumbs img { width:100%; border:1px solid var(--line); background:#fff; display:block; } .thumbs figcaption { font-size:.78rem; color:var(--muted); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+pre { background:var(--soft); padding:.8rem; border-radius:6px; overflow:auto; font-size:.8rem; max-height:16rem; } .meta { color:var(--muted); font-size:.85rem; } .empty { color:var(--muted); font-style:italic; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div><h1 id="name">Paper progress</h1><p class="sub" id="sub">Loading</p></div>
+    <div class="actions"><button id="run" type="button">Run checks</button><a class="btn ghost" id="demo" href="/demo/" target="_blank" rel="noopener" aria-disabled="true">Open demo site</a><a class="btn ghost" id="pdf" href="#" target="_blank" rel="noopener" aria-disabled="true">Open PDF</a></div>
+  </header>
+  <ol class="strip" id="strip" aria-label="Pipeline stages"></ol>
+  <div class="grid">
+    <section><h2>What blocks submission</h2><div id="gates"></div><p class="meta" id="checked"></p><pre id="out" hidden></pre></section>
+    <section><h2>Do next</h2><ol class="plain" id="next"></ol></section>
+    <section><h2>Sections</h2><div id="sections"></div></section>
+    <section><h2>Claims and evidence</h2><div id="claims"></div></section>
+    <section><h2>Citations</h2><div id="cites"></div></section>
+    <section><h2>Experiments</h2><div id="exps"></div></section>
+    <section style="grid-column:1/-1"><h2>Figures</h2><div class="thumbs" id="figs"></div></section>
+  </div>
+</div>
+<script>
+(() => {
+  const $ = (s) => document.querySelector(s);
+  const el = (t, a = {}, ...k) => { const n = document.createElement(t); for (const [x, v] of Object.entries(a)) { if (v === false || v == null) continue; if (x === "class") n.className = v; else n.setAttribute(x, v === true ? "" : v); } for (const c of k.flat(Infinity)) n.append(c && c.nodeType ? c : document.createTextNode(c == null ? "" : String(c))); return n; };
+  const WORD = { done: "Done", progress: "In progress", todo: "Not started" };
+  async function load() {
+    let s; try { const r = await fetch("/api/state", { cache: "no-store" }); s = await r.json(); } catch (e) { $("#sub").textContent = "The dashboard server is not reachable."; return; }
+    if (s.error) { $("#sub").textContent = "Reading project files: " + s.error; return; }
+    $("#name").textContent = s.project; document.title = s.project + " - progress";
+    $("#sub").textContent = `${Math.round(s.overall * 100)}% of the pipeline complete. ${s.venue ? "Venue family: " + s.venue + ". " : ""}${s.sources && s.sources.profile ? "Skill profile: " + s.sources.profile + ((s.sources.precedence || []).length > 1 ? " (" + s.sources.precedence.join(" > ") + ")" : "") + ". " : ""}Updated ${new Date(s.updated).toLocaleTimeString()}.`;
+    $("#strip").replaceChildren(...s.stages.map((g) => el("li", { "data-state": g.state, "data-active": g.active }, el("span", { class: "fill", style: `width:${g.fraction * 100}%` }),
+      el("span", { class: "nm" }, g.name), el("span", { class: "st" }, el("span", { class: "dot" }), WORD[g.state]), el("div", { class: "det" }, g.detail))));
+    $("#next").replaceChildren(...(s.next.length ? s.next.map((t) => el("li", {}, t)) : [el("li", {}, "Every stage is complete. Run the checks once more before submitting.")]));
+    $("#gates").replaceChildren(...(s.gates.length ? s.gates.map((g) => { const k = g.ok ? "pass" : g.kind === "warn" ? "warn" : "fail"; return el("div", { class: "gate" }, el("span", { class: "tag " + k }, k === "pass" ? "Pass" : k === "warn" ? "Warning" : "Fail"), el("div", {}, el("div", {}, g.gate), el("div", { class: "d" }, g.detail))); }) : [el("p", { class: "empty" }, "No checks yet. Press Run checks.")]));
+    $("#checked").textContent = s.checks_at ? "Last checked " + new Date(s.checks_at).toLocaleString() + "." : "";
+    $("#sections").replaceChildren(s.sections.length ? el("table", {}, el("tr", {}, el("th", {}, "Section"), el("th", { class: "n" }, "Words"), el("th", { class: "n" }, "Placeholders")), s.sections.map((x) => el("tr", {}, el("td", {}, x.name), el("td", { class: "n" }, x.words), el("td", { class: "n" }, x.markers ? x.markers : "none")))) : el("p", { class: "empty" }, "No section files yet."));
+    const c = s.claims, tot = c.supported + c.partial + c.open;
+    $("#claims").replaceChildren(tot ? el("div", {}, el("div", { class: "bar", role: "img", "aria-label": `${c.supported} supported, ${c.partial} bounded, ${c.open} open` }, el("i", { style: `width:${c.supported / tot * 100}%;background:var(--done)` }), el("i", { style: `width:${c.partial / tot * 100}%;background:var(--warnfill)` }), el("i", { style: `width:${c.open / tot * 100}%;background:var(--fail)` })),
+      el("div", { class: "legend" }, el("span", {}, el("b", {}, c.supported), " supported"), el("span", {}, el("b", {}, c.partial), " need bounded wording"), el("span", {}, el("b", {}, c.open), " still open"))) : el("p", { class: "empty" }, "No claims listed yet."));
+    $("#cites").replaceChildren(s.citations.cited ? el("div", {}, el("div", { class: "bar" }, el("i", { style: `width:${s.citations.verified / s.citations.cited * 100}%;background:var(--done)` })), el("div", { class: "legend" }, el("span", {}, el("b", {}, s.citations.verified), ` of ${s.citations.cited} cited works verified`), el("span", {}, s.citations.statuses.join(", ")))) : el("p", { class: "empty" }, "Nothing cited yet."));
+    $("#exps").replaceChildren(s.experiments.length ? el("table", {}, s.experiments.map((e) => el("tr", {}, el("td", {}, e.id), el("td", {}, e.title), el("td", {}, e.status), el("td", { class: "meta" }, e.summary)))) : el("p", { class: "empty" }, "No experiments queued."));
+    $("#figs").replaceChildren(...(s.figures.length ? s.figures.map((f) => el("figure", {}, el("img", { src: f.url, alt: f.name, loading: "lazy" }), el("figcaption", {}, f.name))) : [el("p", { class: "empty" }, "No figures yet.")]));
+    const d = $("#demo"); d.setAttribute("aria-disabled", String(!s.demo));
+    const p = $("#pdf"); p.setAttribute("aria-disabled", String(!s.pdf)); p.href = "/files/paper/main.pdf";
+  }
+  $("#run").addEventListener("click", async () => {
+    const b = $("#run"); b.disabled = true; b.textContent = "Checking";
+    try { const r = await (await fetch("/api/run-checks", { method: "POST" })).json(); const o = $("#out"); o.hidden = false; o.textContent = r.output; } catch (e) { $("#checked").textContent = "The check could not run."; }
+    b.disabled = false; b.textContent = "Run checks"; load();
+  });
+  load(); setInterval(() => { if (!document.hidden) load(); }, 4000);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+% @@PROJECT_NAME@@ -- IEEE conference manuscript wrapper (IEEEtran; also the base for ICASSP, Interspeech,
+% SLT, ASRU, EUSIPCO, IJCNN style two-column papers).
+% Section bodies live in sections/*.tex and are shared by every venue wrapper, so switching
+% venue means swapping this file only (python3 scripts/paper_init.py convert PROJECT --to acl).
+% Fetch the official class first:  python3 scripts/fetch_template.py ieee --dest paper
+% ICASSP / Interspeech ship their own author kit each year; if your call for papers provides one,
+% keep these section inputs and take the preamble from that kit (see references/13_venue_templates_acl_ieee.md).
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+\usepackage{cite}                 % sorted numeric citations, IEEE style
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{booktabs}             % zero vertical rules; see references/08_figure_dpi_and_latex_quality.md
+\usepackage{multirow}
+
+% Section bodies are written with \citet / \citep so they also compile under author-year venues.
+\providecommand{\citep}[1]{\cite{#1}}
+\providecommand{\citet}[1]{\cite{#1}}
+\providecommand{\citealp}[1]{\cite{#1}}
+
+\newif\ifcameraready
+\camerareadyfalse
+\newcommand{\camerareadyonly}[1]{\ifcameraready #1\fi}
+\newcommand{\projectname}{@@PROJECT_NAME@@}
+
+\begin{document}
+
+\title{@@TITLE@@}
+
+\author{\IEEEauthorblockN{First Author}
+\IEEEauthorblockA{\textit{Department} \\
+\textit{Institution}\\
+City, Country \\
+email@example.org}
+\and
+\IEEEauthorblockN{Second Author}
+\IEEEauthorblockA{\textit{Department} \\
+\textit{Institution}\\
+City, Country \\
+email@example.org}}
+
+\maketitle
+
+\begin{abstract}
+\input{sections/abstract}
+\end{abstract}
+
+\begin{IEEEkeywords}
+[INSERT: 4--6 index terms, alphabetical order, see references/07 Rule C1]
+\end{IEEEkeywords}
+
+\section{Introduction}\label{sec:intro}
+\input{sections/01_introduction}
+
+\section{Related Work}\label{sec:related}
+\input{sections/02_related_work}
+
+\section{Method}\label{sec:method}
+\input{sections/03_method}
+
+\section{Experimental Setup}\label{sec:setup}
+\input{sections/04_setup}
+
+\section{Results and Analysis}\label{sec:results}
+\input{sections/05_results}
+
+\section{Conclusion}\label{sec:conclusion}
+\input{sections/06_conclusion}
+
+\subsection{Limitations}
+\input{sections/07_limitations}
+
+\subsection{Ethical Considerations}
+\input{sections/08_ethics}
+
+\section*{Licenses and Availability}
+\input{statements/license_statement}
+
+\camerareadyonly{%
+\section*{Author Contributions}
+\input{statements/credit_statement}
+\section*{Acknowledgment}
+\input{statements/acknowledgments}
+}
+
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+
+% Appendix material is not part of an IEEE conference page budget; keep it in the supplementary file
+% or the project website unless the call for papers allows an appendix.
+% \input{sections/A_appendix}
+
+\end{document}

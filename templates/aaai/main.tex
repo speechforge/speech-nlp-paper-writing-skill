@@ -1,0 +1,92 @@
+% @@PROJECT_NAME@@ -- AAAI wrapper. Section bodies live in sections/*.tex (shared by every venue).
+% Fetch the style files:  python3 scripts/fetch_template.py aaai --dest paper --from <folder containing aaai2026.sty>
+% AAAI is strict: do NOT add hyperref, geometry, fullpage, balance, authblk, float, fontenc, CJK; do NOT use
+% \newpage, \clearpage, \pagestyle, \baselinestretch, \columnsep, \tiny, or negative \vspace near captions and headings.
+% Never add \bibliographystyle: aaai2026.sty sets it, and a second one is an error.
+\newif\ifcameraready
+\camerareadyfalse                          % anonymous submission; set \camerareadytrue for the camera-ready version
+\documentclass[letterpaper]{article}       % DO NOT CHANGE THIS
+\ifcameraready
+  \usepackage{aaai2026}                    % camera-ready
+\else
+  \usepackage[submission]{aaai2026}        % anonymous submission
+\fi
+\usepackage{times}                         % DO NOT CHANGE THIS
+\usepackage{helvet}                        % DO NOT CHANGE THIS
+\usepackage{courier}                       % DO NOT CHANGE THIS
+\usepackage[hyphens]{url}                  % DO NOT CHANGE THIS
+\usepackage{graphicx}                      % DO NOT CHANGE THIS
+\urlstyle{rm}                              % DO NOT CHANGE THIS
+\def\UrlFont{\rm}                          % DO NOT CHANGE THIS
+\usepackage{natbib}                        % DO NOT CHANGE THIS AND DO NOT ADD ANY OPTIONS TO IT
+\usepackage{caption}                       % DO NOT CHANGE THIS AND DO NOT ADD ANY OPTIONS TO IT
+\frenchspacing                             % DO NOT CHANGE THIS
+\setlength{\pdfpagewidth}{8.5in}           % DO NOT CHANGE THIS
+\setlength{\pdfpageheight}{11in}           % DO NOT CHANGE THIS
+\usepackage{booktabs}
+\usepackage{amsmath,amssymb}
+\usepackage{multirow}
+\pdfinfo{
+/TemplateVersion (2026.1)
+}
+\setcounter{secnumdepth}{2}                % sections numbered (allowed values: 0, 1, 2; never higher)
+
+\newcommand{\camerareadyonly}[1]{\ifcameraready #1\fi}
+\newcommand{\projectname}{@@PROJECT_NAME@@}
+
+\title{@@TITLE@@}
+\author{First Author\textsuperscript{1}, Second Author\textsuperscript{2}}
+\affiliations{
+  \textsuperscript{1}Institution One, City, Country\\
+  \textsuperscript{2}Institution Two, City, Country\\
+  email@example.org
+}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\input{sections/abstract}
+\end{abstract}
+
+% Camera-ready only (between the abstract and the body): links to code, data, or the project website, for example
+% \begin{links}\link{Project page}{https://example.org}\end{links}
+
+\section{Introduction}\label{sec:intro}
+\input{sections/01_introduction}
+
+\section{Related Work}\label{sec:related}
+\input{sections/02_related_work}
+
+\section{Method}\label{sec:method}
+\input{sections/03_method}
+
+\section{Experimental Setup}\label{sec:setup}
+\input{sections/04_setup}
+
+\section{Results and Analysis}\label{sec:results}
+\input{sections/05_results}
+
+\section{Conclusion}\label{sec:conclusion}
+\input{sections/06_conclusion}
+
+\section{Limitations}
+\input{sections/07_limitations}
+
+\section{Ethical Considerations}
+\input{sections/08_ethics}
+
+\section{Licenses and Availability}
+\input{statements/license_statement}
+
+\camerareadyonly{%
+\section{Author Contributions}
+\input{statements/credit_statement}
+\section{Acknowledgments}
+\input{statements/acknowledgments}
+}
+
+% References and end of paper: these lines must be at the very end.
+\bibliography{references}
+
+\end{document}

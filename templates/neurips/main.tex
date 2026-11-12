@@ -1,0 +1,80 @@
+% @@PROJECT_NAME@@ -- NeurIPS wrapper. Section bodies live in sections/*.tex (shared by every venue).
+% Fetch the style file:  python3 scripts/fetch_template.py neurips --dest paper --from <folder containing neurips.sty>
+% Style options: none = anonymous submission | final = camera-ready | preprint = public preprint.
+% The official paper checklist (16 items) is answered in the venue's checklist block; draft the answers with
+%   python3 scripts/venue_check.py PROJECT      (writes submission_checklist.md)
+\documentclass{article}
+\usepackage{neurips_2025}   % camera-ready: \usepackage[final]{neurips_2025}   preprint: \usepackage[preprint]{neurips_2025}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath,amssymb}
+\usepackage{multirow}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{url}
+
+\newif\ifcameraready
+\camerareadyfalse
+\newcommand{\camerareadyonly}[1]{\ifcameraready #1\fi}
+\newcommand{\projectname}{@@PROJECT_NAME@@}
+
+\title{@@TITLE@@}
+\author{First Author \\ Affiliation \\ \texttt{email@example.org}
+  \And Second Author \\ Affiliation \\ \texttt{email@example.org}}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\input{sections/abstract}
+\end{abstract}
+
+\section{Introduction}\label{sec:intro}
+\input{sections/01_introduction}
+
+\section{Related Work}\label{sec:related}
+\input{sections/02_related_work}
+
+\section{Method}\label{sec:method}
+\input{sections/03_method}
+
+\section{Experimental Setup}\label{sec:setup}
+\input{sections/04_setup}
+
+\section{Results and Analysis}\label{sec:results}
+\input{sections/05_results}
+
+\section{Conclusion}\label{sec:conclusion}
+\input{sections/06_conclusion}
+
+\section*{Limitations}
+\input{sections/07_limitations}
+
+\section*{Broader Impacts and Safeguards}
+\input{sections/08_ethics}
+
+\section*{Licenses and Availability}
+\input{statements/license_statement}
+
+\camerareadyonly{%
+\section*{Author Contributions}
+\input{statements/credit_statement}
+\section*{Acknowledgments}
+\input{statements/acknowledgments}
+}
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\appendix
+\section{Additional Details}\label{sec:appendix}
+\input{sections/A_appendix}
+
+% The paper checklist goes after the references and appendix, outside the page limit.
+% Paste the official checklist block from the current NeurIPS kit here and answer it from submission_checklist.md.
+\IfFileExists{checklist.tex}{\input{checklist}}{}
+
+\end{document}

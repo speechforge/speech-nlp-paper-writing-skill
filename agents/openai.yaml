@@ -1,0 +1,4 @@
+interface:
+  display_name: "Speech & NLP Paper Writing Skill"
+  short_description: "Write, review, and package research papers with verified citations and human English"
+  default_prompt: "Use $speech-nlp-paper-writing to build or revise my paper from this folder: story, claim-evidence map, verified citations, figures, ACL or IEEE template, credit and license statements, and a project-named demo site."

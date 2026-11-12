@@ -1,0 +1,24 @@
+{
+  "name": "ieee-lab",
+  "description": "IEEE-lab style only (lab standards + overlay); other author sources off",
+  "enable": [
+    "speech_base",
+    "domain_tts",
+    "domain_asr",
+    "domain_dataset",
+    "domain_nlp",
+    "domain_eval",
+    "ml_craft",
+    "venue_acl",
+    "venue_ieee",
+    "venue_neurips",
+    "venue_icml",
+    "venue_iclr",
+    "venue_aaai",
+    "venue_colm",
+    "author_ieee_lab"
+  ],
+  "precedence": [
+    "author_ieee_lab"
+  ]
+}

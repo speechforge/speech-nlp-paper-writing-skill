@@ -1,0 +1,79 @@
+% @@PROJECT_NAME@@ -- ICLR wrapper. Section bodies live in sections/*.tex (shared by every venue).
+% Fetch the style files:  python3 scripts/fetch_template.py iclr --dest paper
+% Camera-ready: set \camerareadytrue below (this issues \iclrfinalcopy). Never for the blind submission.
+\documentclass{article}
+\usepackage{iclr2026_conference,times}
+\IfFileExists{math_commands.tex}{\input{math_commands.tex}}{}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath,amssymb}
+\usepackage{multirow}
+\usepackage{xcolor}
+
+\newif\ifcameraready
+\camerareadyfalse
+\newcommand{\camerareadyonly}[1]{\ifcameraready #1\fi}
+\newcommand{\projectname}{@@PROJECT_NAME@@}
+
+\title{@@TITLE@@}
+\author{First Author \\ Department, Institution \\ City, Country \\ \texttt{email@example.org}
+  \And Second Author \\ Department, Institution \\ City, Country \\ \texttt{email@example.org}}
+
+\ifcameraready\iclrfinalcopy\fi
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\input{sections/abstract}
+\end{abstract}
+
+\section{Introduction}\label{sec:intro}
+\input{sections/01_introduction}
+
+\section{Related Work}\label{sec:related}
+\input{sections/02_related_work}
+
+\section{Method}\label{sec:method}
+\input{sections/03_method}
+
+\section{Experimental Setup}\label{sec:setup}
+\input{sections/04_setup}
+
+\section{Results and Analysis}\label{sec:results}
+\input{sections/05_results}
+
+\section{Conclusion}\label{sec:conclusion}
+\input{sections/06_conclusion}
+
+\section*{Limitations}
+\input{sections/07_limitations}
+
+% Optional at ICLR (about one page, outside the page limit): ethics and reproducibility statements.
+\section*{Ethics Statement}
+\input{sections/08_ethics}
+
+\section*{Licenses and Availability}
+\input{statements/license_statement}
+
+\camerareadyonly{%
+\section*{Author Contributions}
+\input{statements/credit_statement}
+\section*{Acknowledgments}
+\input{statements/acknowledgments}
+}
+
+\bibliography{references}
+\bibliographystyle{iclr2026_conference}
+
+\appendix
+\section{Additional Details}\label{sec:appendix}
+\input{sections/A_appendix}
+
+% ICLR policy: if an LLM played a significant role in ideation or writing, describe its precise role in a separate appendix section.
+\section{Use of Large Language Models}\label{sec:llm}
+\input{statements/ai_disclosure}
+
+\end{document}

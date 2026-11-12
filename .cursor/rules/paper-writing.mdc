@@ -1,0 +1,6 @@
+---
+description: Write, revise, review, and package academic research papers (NLP, speech, ML) with verified citations, human English without coding terms, ACL and IEEE templates, figures, a project-named demo site, and readiness gates.
+globs: ["**/*.tex", "**/paper_story.md", "**/claim_evidence_map.md", "**/project_meta.json"]
+alwaysApply: false
+---
+Follow `AGENTS.md` and `SKILL.md` in the Speech & NLP Paper Writing Skill folder. Core rules: never invent a citation or number (use `scripts/citations.py`); no coding terms in the paper (`scripts/prose_lint.py`); bound claims by evidence; carry the novelty through every section; include CRediT and license statements; name the demo site after the project, not a venue; run `scripts/paper_check.py PROJECT ready` before saying done.

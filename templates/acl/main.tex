@@ -1,0 +1,80 @@
+% @@PROJECT_NAME@@ -- ACL-family manuscript wrapper (ACL, EMNLP, NAACL, EACL, AACL via ARR).
+% Section bodies live in sections/*.tex and are shared by every venue wrapper, so switching
+% venue means swapping this file only (python3 scripts/paper_init.py convert PROJECT --to ieee).
+% Fetch the official style files first:  python3 scripts/fetch_template.py acl --dest paper
+% Citation commands in the bodies: \citet{key} (in text), \citep{key} (parenthetical).
+\documentclass[11pt]{article}
+\usepackage[review]{acl}   % review = anonymous | final = camera-ready | preprint = public, non-anonymous
+\usepackage{times}
+\usepackage{latexsym}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{microtype}
+\usepackage{inconsolata}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath,amssymb}
+\usepackage{multirow}
+\usepackage{xcolor}
+
+% Anonymity switch: statements that reveal identity (contributions, funding, thanks) print only
+% in the camera-ready version. Set \cameraready to true together with [final] above.
+\newif\ifcameraready
+\camerareadyfalse
+\newcommand{\camerareadyonly}[1]{\ifcameraready #1\fi}
+\newcommand{\projectname}{@@PROJECT_NAME@@}
+
+\title{@@TITLE@@}
+\author{First Author \\ Affiliation \\ City, Country \\ \texttt{email@example.org}
+  \And Second Author \\ Affiliation \\ City, Country \\ \texttt{email@example.org}}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\input{sections/abstract}
+\end{abstract}
+
+\section{Introduction}\label{sec:intro}
+\input{sections/01_introduction}
+
+\section{Related Work}\label{sec:related}
+\input{sections/02_related_work}
+
+\section{Method}\label{sec:method}
+\input{sections/03_method}
+
+\section{Experimental Setup}\label{sec:setup}
+\input{sections/04_setup}
+
+\section{Results and Analysis}\label{sec:results}
+\input{sections/05_results}
+
+\section{Conclusion}\label{sec:conclusion}
+\input{sections/06_conclusion}
+
+% ACL-family venues require an unnumbered Limitations section after the conclusion.
+\section*{Limitations}
+\input{sections/07_limitations}
+
+\section*{Ethical Considerations}
+\input{sections/08_ethics}
+
+\section*{Licenses and Availability}
+\input{statements/license_statement}
+
+\camerareadyonly{%
+\section*{Author Contributions}
+\input{statements/credit_statement}
+\section*{Acknowledgments}
+\input{statements/acknowledgments}
+}
+
+\bibliography{references}
+\bibliographystyle{acl_natbib}
+
+\appendix
+\section{Additional Details}\label{sec:appendix}
+\input{sections/A_appendix}
+
+\end{document}
